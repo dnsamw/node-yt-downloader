@@ -37,7 +37,8 @@ router.use("/jsfiles", express.static(__dirname + "/js"));
 router.use("/imgfiles", express.static(__dirname + "/img"));
 
 router.get("/", function (req, res) {
-  res.sendFile("index.html", { root: __dirname });
+  //res.sendFile("index.html", { root: __dirname });
+  res.render("home", { result: {} });
 });
 
 router.post("/", function (req, res) {
