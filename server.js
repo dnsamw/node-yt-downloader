@@ -4,8 +4,6 @@ const app = express(); //step 03 : create express app
 const expressHandlebars = require("express-handlebars");
 const Handlebars = require("handlebars"); // view engine
 const bodyParser = require("body-parser");
-const axios = require("axios");
-//const fs = require("fs");
 const youtubedl = require("youtube-dl");
 
 app.use("/", router);
@@ -60,47 +58,39 @@ router.post("/", function (req, res) {
           thumbnail: info.thumbnail,
           url: info.url,
           description: info.description,
+          resolution: info.height,
+          duration: info.duration,
+          formats: info.formats,
         };
-        console.log("id:", info.id);
-
-        // console.log("title:", info.title);
-        // console.log("url:", info.url);
-        // console.log("thumbnail:", info.thumbnail);
-        // console.log("description:", info.description);
-        // console.log("filename:", info._filename);
-        // console.log("format id:", info.format_id);
-        //res.end(JSON.stringify(info));
-        res.render("download", { result: datsObj });
+        let filesArray = [];
+        for (let i = 0; i < info.formats.length - 1; i++) {
+          if (info.formats[i].ext === "webm") {
+            console.log("yes!");
+            filesArray[i] = {
+              resolution: info.formats[i].format,
+              type: info.formats[i].ext,
+              url: info.formats[i].url,
+              size:
+                Math.ceil(
+                  Number(info.formats[i].filesize / 1024 / 1024) * 100
+                ) / 100,
+            };
+          }
+        }
+        // let outArray = [];
+        // for (const iterator of filesArray) {
+        //   outArray += iterator.resolution;
+        // }
+        //console.log(outArray);
+        //res.render("download", { result: { one: datsObj, two: filesArray } });
+        res.end(JSON.stringify(info));
       });
     } catch (error) {
       console.log(error);
     }
   };
-
   getVidInfo();
 });
-
-// const video = youtubedl(
-//   "http://www.youtube.com/watch?v=90AiXO1pAiA",
-//   // Optional arguments passed to youtube-dl.
-//   ["--format=18"],
-//   // Additional options can be given for calling `child_process.execFile()`.
-//   { cwd: __dirname }
-// );
-
-// let fileName = "";
-
-// Will be called when the download starts.
-// video.on("info", function (info) {
-//   console.log("Download started");
-//   console.log("filename: " + info._filename);
-//   console.log("size: " + info.size);
-//   fileName = info._filename;
-//   console.log(info);
-// });
-
-// video.pipe(fs.createWriteStream(fileName + ".mp4"));
 app.listen(8080, function () {
-  //step 04 : make app listen via an specific port.
   console.log("express server is up! : http://localhost:8080/");
 });

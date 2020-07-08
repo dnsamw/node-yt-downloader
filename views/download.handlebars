@@ -28,15 +28,26 @@
             <button class="btn-search" type="Submit">Prepare</button>
           </div>
         </div>
-        <span class="info">a youtube downloader by <a href="https://github.com/dnsamw">dnsamw</a></span>
+        <span class="info">a youtube downloader by <a style="text-decoration-line: none; color:aliceblue;"
+            href="https://github.com/dnsamw">dnsamw</a></span>
       </form>
     </div>
 
     <div class="download-item">
-      <img class="thumbnail" src="{{result.thumbnail}}" />
+      <div class="duration">{{result.one.duration}}</div>
+      <img class="thumbnail" src="{{result.one.thumbnail}}" />
       <div class="title">
         <h2>{{result.title}}</h2>
-        <button class="btn-search btn-download"><a href="{{result.url}}" target="_blank">Download</a></button>
+        <button class="btn-search btn-download"><a href="{{result.one.url}}" target="_blank">Download :
+            {{result.one.resolution}}p</a></button>
+        {{!-- {{#each result.two}}
+        <div>
+          <div>Type:{{this.ext}}</div>
+          <div>Size:{{this.size}} MB</div>
+          <button class="btn-search btn-download"><a href="{{this.url}}" target="_blank">Download :
+              {{this.resolution}}p</a></button>
+        </div>
+        {{/each}} --}}
         <div class="description">
           <h3>Description :</h3>
           <small>{{result.description}}</small>
@@ -47,6 +58,6 @@
 
   </div>
   <script src="jsfiles/extention/choices.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 
 </html>
