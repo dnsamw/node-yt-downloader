@@ -44,7 +44,7 @@ router.post("/", function (req, res) {
   const options = ["--username=user", "--password=hunter2"];
 
   const getVidInfo = async () => {
-    console.log("here");
+    console.log("Awaiting response : youtube...");
     try {
       const vidInfo = await youtubedl.getInfo(videoURL, options, function (
         err,
@@ -62,10 +62,12 @@ router.post("/", function (req, res) {
           duration: info.duration,
           formats: info.formats,
         };
+
         let filesArray = [];
+
         for (let i = 0; i < info.formats.length - 1; i++) {
           if (info.formats[i].ext === "webm") {
-            console.log("yes!");
+            //console.log("yes!");
             filesArray[i] = {
               resolution: info.formats[i].format,
               type: info.formats[i].ext,
@@ -81,12 +83,13 @@ router.post("/", function (req, res) {
         // for (const iterator of filesArray) {
         //   outArray += iterator.resolution;
         // }
-        //console.log(outArray);
-        //res.render("download", { result: { one: datsObj, two: filesArray } });
-        res.end(JSON.stringify(info));
+        console.log(filesArray);
+        res.render("download", { result: { one: datsObj, two: filesArray } });
+        //res.end(JSON.stringify(info));
       });
     } catch (error) {
       console.log(error);
+      res.end("NO INTERNET!");
     }
   };
   getVidInfo();

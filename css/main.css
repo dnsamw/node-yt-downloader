@@ -999,19 +999,20 @@ button {
   left: 0;
   right: 0;
   bottom: 0%;
-  background-color: #31768f; /* Black background with opacity */
+  background-color: #112931; /* Black background with opacity */
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
 }
 .thumbnail {
   margin: 0.2rem;
-  max-height: 15rem;
-  border-radius: 0.8rem;
+  max-height: 18rem;
+  border-radius: 1.8rem;
+  padding: 0.8rem;
 }
 .title {
   color: #80d0c7;
 }
 .description {
-  padding-bottom: 0.2rem;
+  padding: 0.2rem;
 }
 .btn-download {
   white-space: nowrap;
@@ -1023,7 +1024,7 @@ button {
   background: #00ad5f;
   transition: all 0.2s ease-out, color 0.2s ease-out;
   border-radius: 0.5rem;
-  padding: 0.8rem;
+  padding: 0.4rem;
   cursor: pointer;
 }
 .btn-download a {
@@ -1038,4 +1039,41 @@ button {
   margin-top: 0.5rem;
   padding: 0.2rem;
   border-radius: 0.5rem;
+}
+
+/*Loading three-dots*/
+.dotcontainer {
+  visibility: hidden;
+  position: fixed;
+  width: 48px;
+  margin: 70px auto;
+}
+.dots {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+}
+.dot1 {
+  background-color: aliceblue;
+  animation: jump-up 0.9s 0.1s linear infinite;
+  animation-timing-function: ease-out;
+}
+.dot2 {
+  background-color: aliceblue;
+  animation: jump-up 0.9s 0.2s linear infinite;
+  animation-timing-function: ease-out;
+}
+.dot3 {
+  background-color: aliceblue;
+  animation: jump-up 0.9s 0.3s linear infinite;
+  animation-timing-function: ease-out;
+}
+@keyframes jump-up {
+  50% {
+    transform: translate(0, 15px);
+  }
+}
+.active {
+  visibility: visible;
 }

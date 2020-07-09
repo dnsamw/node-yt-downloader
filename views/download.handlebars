@@ -11,7 +11,14 @@
 
 <body>
   <div class="container">
+
     <div class="s130">
+      <!-- Loading Three dots -->
+      <div class="dotcontainer">
+        <div class="dots dot1"></div>
+        <div class="dots dot2"></div>
+        <div class="dots dot3"></div>
+      </div>
       <form action="http://localhost:8080/" method="POST">
         <div class="inner-form">
           <div class="input-field first-wrap">
@@ -25,7 +32,7 @@
             <input name="ytvurl" id="search" type="text" placeholder="https://www.youtube.com/watch?v=ViDeOId" />
           </div>
           <div class="input-field second-wrap">
-            <button class="btn-search" type="Submit">Prepare</button>
+            <button class="btn-search" type="Submit" onclick="activeDots();">Prepare</button>
           </div>
         </div>
         <span class="info">a youtube downloader by <a style="text-decoration-line: none; color:aliceblue;"
@@ -37,7 +44,7 @@
       <div class="duration">{{result.one.duration}}</div>
       <img class="thumbnail" src="{{result.one.thumbnail}}" />
       <div class="title">
-        <h2>{{result.title}}</h2>
+        <h2>{{result.one.title}}</h2>
         <button class="btn-search btn-download"><a href="{{result.one.url}}" target="_blank">Download :
             {{result.one.resolution}}p</a></button>
         {{!-- {{#each result.two}}
@@ -50,7 +57,7 @@
         {{/each}} --}}
         <div class="description">
           <h3>Description :</h3>
-          <small>{{result.description}}</small>
+          <small>{{result.one.description}}</small>
         </div>
       </div>
     </div>
@@ -58,6 +65,12 @@
 
   </div>
   <script src="jsfiles/extention/choices.js"></script>
+  <script>
+    const loading = document.getElementsByClassName("dotcontainer");
+    function activeDots() {
+      loading[0].classList.add("active");
+    }
+  </script>
 </body>
 
 </html>
